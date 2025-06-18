@@ -9,14 +9,14 @@ services:
     ports:
       - "8096:8096"
     volumes:
-      - ./config/jellyfin:/config
-      - /mnt/tv:/media/tv:ro
-      - /mnt/movies:/media/movies:ro
-      - /mnt/movies_overflow:/media/movies_overflow
+      - ${CONFIG_DIR}/jellyfin:/config
+      - ${TV_DIR}:/media/tv:ro
+      - ${MOVIES_DIR}:/media/movies:ro
+      - ${MOVIES_OVERFLOW_DIR}:/media/movies_overflow:ro
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     networks:
       - media_network
 
@@ -30,15 +30,15 @@ services:
       - "6881:6881"
       - "6881:6881/udp"
     volumes:
-      - ./config/qbittorrent:/config
-      - /mnt/downloads:/downloads
-      - /mnt/tv:/media/tv
-      - /mnt/movies:/media/movies
-      - /mnt/movies_overflow:/media/movies_overflow
+      - ${CONFIG_DIR}/qbittorrent:/config
+      - ${DOWNLOADS_DIR}:/downloads
+      - ${TV_DIR}:/media/tv
+      - ${MOVIES_DIR}:/media/movies
+      - ${MOVIES_OVERFLOW_DIR}:/media/movies_overflow
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
       - WEBUI_PORT=8080
     networks:
       - media_network
@@ -51,13 +51,13 @@ services:
     ports:
       - "8989:8989"
     volumes:
-      - ./config/sonarr:/config
-      - /mnt/downloads:/downloads
-      - /mnt/tv:/media/tv
+      - ${CONFIG_DIR}/sonarr:/config
+      - ${DOWNLOADS_DIR}:/downloads
+      - ${TV_DIR}:/media/tv
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     networks:
       - media_network
 
@@ -69,14 +69,14 @@ services:
     ports:
       - "7878:7878"
     volumes:
-      - ./config/radarr:/config
-      - /mnt/downloads:/downloads
-      - /mnt/movies:/media/movies
-      - /mnt/movies_overflow:/media/movies_overflow
+      - ${CONFIG_DIR}/radarr:/config
+      - ${DOWNLOADS_DIR}:/downloads
+      - ${MOVIES_DIR}:/media/movies
+      - ${MOVIES_OVERFLOW_DIR}:/media/movies_overflow
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     networks:
       - media_network
 
@@ -88,14 +88,14 @@ services:
     ports:
       - "6767:6767"
     volumes:
-      - ./config/bazarr:/config
-      - /mnt/tv:/media/tv
-      - /mnt/movies:/media/movies
-      - /mnt/movies_overflow:/media/movies_overflow
+      - ${CONFIG_DIR}/bazarr:/config
+      - ${TV_DIR}:/media/tv
+      - ${MOVIES_DIR}:/media/movies
+      - ${MOVIES_OVERFLOW_DIR}:/media/movies_overflow
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     networks:
       - media_network
 
@@ -107,13 +107,13 @@ services:
     ports:
       - "4533:4533"
     volumes:
-      - ./config/navidrome:/data
-      - /mnt/music:/music:ro
+      - ${CONFIG_DIR}/navidrome:/data
+      - ${MUSIC_DIR}:/music:ro
     environment:
       - ND_SCANINTERVAL=1h
       - ND_LOGLEVEL=info
       - ND_SESSIONTIMEOUT=24h
-      - TZ=Etc/UTC
+      - TZ=${TZ}
     networks:
       - media_network
 
@@ -125,11 +125,11 @@ services:
     ports:
       - "5055:5055"
     volumes:
-      - ./config/jellyseerr:/app/config
+      - ${CONFIG_DIR}/jellyseerr:/app/config
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     networks:
       - media_network
 
@@ -141,12 +141,12 @@ services:
     ports:
       - "9117:9117"
     volumes:
-      - ./config/jackett:/config
-      - /mnt/downloads:/downloads
+      - ${CONFIG_DIR}/jackett:/config
+      - ${DOWNLOADS_DIR}:/downloads
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     networks:
       - media_network
 
@@ -158,12 +158,12 @@ services:
     ports:
       - "8181:8181"
     volumes:
-      - ./config/tautulli:/config
-      - ./config/jellyfin/log:/logs:ro
+      - ${CONFIG_DIR}/tautulli:/config
+      - ${CONFIG_DIR}/jellyfin/log:/logs:ro
     environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Etc/UTC
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
     networks:
       - media_network
 
