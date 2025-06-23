@@ -1,6 +1,6 @@
 # Universal Media Server Docker Stack (Public Release)
 
-A complete, self-hosted media server solution using Docker Compose. This stack includes Jellyfin, qBittorrent, Navidrome, Jackett, Sonarr, Radarr, Bazarr, Jellyseerr, and Tautulli. Now works on Windows, Linux, and Mac with double-click launchers for all platforms.
+A complete, self-hosted media server solution using Docker Compose. This stack includes Jellyfin, qBittorrent, Navidrome, Jackett, Prowlarr, Sonarr, Radarr, Bazarr, Jellyseerr, and Tautulli. Now works on Windows, Linux, and Mac with double-click launchers for all platforms.
 
 ## Services Included
 
@@ -12,6 +12,7 @@ A complete, self-hosted media server solution using Docker Compose. This stack i
 - **Navidrome** (4533): Music server for streaming your music library
 - **Jellyseerr** (5055): Request management system for movies and TV shows
 - **Jackett** (9117): Indexer proxy for private/public torrent trackers
+- **Prowlarr** (9696): Modern indexer management with native *arr integration
 - **Tautulli** (8181): Analytics and monitoring (optional)
 
 ## Universal Quick Start
@@ -56,6 +57,7 @@ A complete, self-hosted media server solution using Docker Compose. This stack i
 - Navidrome: http://localhost:4533
 - Jellyseerr: http://localhost:5055
 - Jackett: http://localhost:9117
+- Prowlarr: http://localhost:9696
 - Tautulli: http://localhost:8181
 
 ## Security Best Practices
@@ -81,6 +83,7 @@ public-release/
 │   ├── navidrome/
 │   ├── jellyseerr/
 │   ├── jackett/
+│   ├── prowlarr/
 │   └── tautulli/
 ├── docker-compose.yml
 ├── .env.example
@@ -96,11 +99,12 @@ public-release/
 
 1. **Jellyfin:** Add `/media/movies`, `/media/movies_overflow`, `/media/tv`, `/music` as libraries.
 2. **qBittorrent:** Change the default password and set download path to `/downloads`.
-3. **Sonarr/Radarr:** Add qBittorrent as a download client, add root folders, and configure indexers via Jackett.
+3. **Sonarr/Radarr:** Add qBittorrent as a download client, add root folders, and configure indexers via Jackett or Prowlarr.
 4. **Bazarr:** Connect to Sonarr/Radarr and configure subtitle providers.
 5. **Navidrome:** Log in (default: admin/admin), change password, and scan `/music`.
 6. **Jackett:** Add your private tracker credentials, copy the Torznab feed URL and API key, and add as a custom indexer in Sonarr/Radarr.
-7. **Jellyseerr:** Connect to Jellyfin, Sonarr, and Radarr using their internal Docker network URLs and API keys.
+7. **Prowlarr:** Modern alternative to Jackett - add your indexers here and they'll automatically sync to Sonarr/Radarr. Go to Settings > Apps to connect Sonarr/Radarr.
+8. **Jellyseerr:** Connect to Jellyfin, Sonarr, and Radarr using their internal Docker network URLs and API keys.
 
 ## Useful Commands
 
