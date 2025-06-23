@@ -150,6 +150,22 @@ services:
     networks:
       - media_network
 
+  # Indexer Management - Prowlarr
+  prowlarr:
+    image: linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: unless-stopped
+    ports:
+      - "9696:9696"
+    volumes:
+      - ${CONFIG_DIR}/prowlarr:/config
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    networks:
+      - media_network
+
   # Optional: Monitoring and Analytics - Tautulli
   tautulli:
     image: linuxserver/tautulli:latest
@@ -180,4 +196,5 @@ volumes:
   navidrome_config:
   jellyseerr_config:
   jackett_config:
+  prowlarr_config:
   tautulli_config: 
